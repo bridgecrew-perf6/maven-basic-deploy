@@ -18,7 +18,7 @@
     <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
      
     <!-- sonar definitions-->
-		<sonar.projectKey>com.ynov:sonar-${project.artifactId}-runner</sonar.projectKey>
+		<sonar.projectKey>com.ynov.deploy.test:sonar-${project.artifactId}-runner</sonar.projectKey>
     <sonar.coverage.jacoco.xmlReportPaths>${project.testresult.directory}/coverage/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>	
     <sonar.sources>${project.basedir}/src/main/</sonar.sources>
 		<sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
