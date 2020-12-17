@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.sonarqube</groupId>
 	<artifactId>sonarscanner-maven-basic</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 
 	<name>Maven project</name>
 
@@ -43,7 +41,7 @@
 		<connection>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</connection>
 		<developerConnection>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</developerConnection>
 		<url>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</url>
-		<tag>HEAD</tag>
+		<tag>sonarscanner-maven-basic-1.2</tag>
 	</scm>
 
 	<distributionManagement>
