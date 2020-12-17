@@ -41,9 +41,9 @@
   </properties>
 
   <scm>
-        <connection>scm:git:git@github.com:ynovmaster2/maven-examples.git</connection>
-        <developerConnection>scm:git:git@github.com:ynovmaster2/maven-examples.git</developerConnection>
-        <url>scm:git:git@github.com:ynovmaster2/maven-examples.git</url>
+        <connection>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</connection>
+        <developerConnection>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</developerConnection>
+        <url>scm:git:git@github.com:ynovmaster2/maven-basic-deploy.git</url>
         <tag>HEAD</tag>
     </scm>
 
