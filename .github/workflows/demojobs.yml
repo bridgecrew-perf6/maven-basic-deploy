@@ -2,8 +2,9 @@ name: Multiples jops
 on:
   push:
     branches:
-      - develop
-      - feature/**
+      - 'develop'
+      - 'feature/**'
+      - 'master'
 jobs:
   job1: 
      name: Job1 Starting with a Maven workflow template
