@@ -42,7 +42,7 @@ jobs:
   
   job3:
     name: job3 Running on a different operating system
-    needs: job1
+    needs: job3_publish
     runs-on: ${{ matrix.os }}
     strategy:
        matrix:
@@ -128,6 +128,22 @@ jobs:
         with:
           name: code-coverage-report
           path: target/jacoco
+          
+          
+  job3_publish:
+    name: publish snapshot
+    needs: job1
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - name: publish snapshot artifact to jfrog artifactory
+        run: |
+             cat ~/.m2/settings.xml
+             mvn -ntp package deploy -Pprod -DskipTests
   
       
     
