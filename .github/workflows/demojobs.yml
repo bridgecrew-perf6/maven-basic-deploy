@@ -143,27 +143,25 @@ jobs:
           
       - name: Generate settings.xm
         run: | 
-          echo  "<?xml version="1.0" encoding="UTF-8"?>" >> settings.xml
-          echo "<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          echo "<?xml version="1.0" encoding="UTF-8"?>" >> settings.xml
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">" >> settings.xml 
-          echo "<servers>
-                  <server>
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+           <servers>
+               <server>
                     <id>snapshots</id>
                     <username>${{ secrets.JFROG_USER }}</username>
                     <password>${{ secrets.JFROG_ENCRYPTED_PWD }}</password>
-                  </server>
-                  <server>
+               </server>
+               <server>
                     <id>central</id>
                     <username>${{ secrets.JFROG_USER }}</username>
                     <password>${{ secrets.JFROG_ENCRYPTED_PWD }}</password>
-                  </server>
-                  <server>
-                    <id>gpg.passphrase</id>
-                    <passphrase>${env.GPG_PASSPHRASE}</passphrase>
-                  </server>
-              </servers>
-              </settings>" >> settings.xml
+              </server>
+           </servers>
+          </settings>" >> settings.xml
+          
+          
           mv settings.xml ~/.m2/settings.xml
           cat ~/.m2/settings.xml
       - name: publish snapshot artifact to jfrog artifactory
