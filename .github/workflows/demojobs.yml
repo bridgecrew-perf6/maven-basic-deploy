@@ -105,7 +105,7 @@ jobs:
         env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-              git config --global user.email "j.bilong@gmail.com
+              git config --global user.email "j.bilong@gmail.com"
               git config --global user.name "bilonjea"
 
               cp config/settings.xml ~/.m2/settings.xml
