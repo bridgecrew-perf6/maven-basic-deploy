@@ -77,15 +77,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
-      - name: Upload Trigger
-        uses: advancedcsg-open/action-jfrog-cli@master
+      
+      - name: Ping Artifactory
+        uses: katcosgrove/jfrog-actions@master
         with:
-          url: ${{ secrets.JFROG_URL }}
-          credentials type: ${{ secrets.JFROG_CREDENTIALS_TYPE }}
-          password: ${{ secrets.JFROG_ENCRYPTED_PWD }}
-          #access token: ${{ secrets.JFROG_ACCESS_TOKEN }}
-          #apikey: ${{ secrets.JFROG_API_KEY }}
-          args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
+            cmd: 'ping'
+        env:
+            auth: ${{ secrets.JFROG_AUTH_TYPE }}
+            apikey: ${{ secrets.JFROG_API_KEY }}
+            #user: ${{ secrets.JFROG_USER }}
+            #pass: ${{ secrets.JFROG_ENCRYPTED_PWD }}
+            url: ${{ secrets.JFROG_URL }}
       - name: publish snapshot artifact to jfrog artifactory
         run: |
               cat ~/.m2/settings.xml
