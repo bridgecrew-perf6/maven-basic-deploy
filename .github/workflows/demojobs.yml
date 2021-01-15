@@ -89,7 +89,7 @@ jobs:
 
   job5_release:
     name: publish release to jfrog
-    needs: job3_publish
+    needs: job4_publish
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
