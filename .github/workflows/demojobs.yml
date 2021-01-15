@@ -64,6 +64,29 @@ jobs:
               mvn -ntp package deploy -Pprod -DskipTests
 
 
+  job4_publish:
+    name: Upload Trigger
+    needs: job3_publish
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.1
+      - name: publish to artifactory
+        uses: advancedcsg-open/action-jfrog-cli@master
+        with:
+          url: ${{ secrets.JFROG_URL }}
+          credentials type: ${{ secrets.JFROG_CREDENTIALS_TYPE }}
+          apikey: ${{ secrets.JFROG_API_KEY }}
+          #args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
+
+
+
   job5_release:
     name: publish release to jfrog
     needs: job3_publish
