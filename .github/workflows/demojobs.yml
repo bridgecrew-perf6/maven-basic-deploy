@@ -131,7 +131,8 @@ jobs:
               cat ~/.m2/settings.xml
               mvn -ntp package deploy -Pprod -DskipTests
 
-  job5_release:
+  
+ job5_release:
     name: publish release to jfrog
     needs: job4_publish
     runs-on: ubuntu-20.04
@@ -151,6 +152,35 @@ jobs:
         run: |
               git config --global user.email "j.bilong@gmail.com"
               git config --global user.name "bilonjea"
-
               cp config/settings.xml ~/.m2/settings.xml
-              mvn -ntp release:prepare release:perform -DskipTests
+              mvn -ntp release:prepare release:perform -DskipTests 
+  
+  
+  job5_release_bis:
+    name: publish release to jfrog
+    needs: job4_publish
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.1
+      - name: publish release artifact to jfrog artifactory
+        continue-on-error: true
+        uses: MiniDigger/github-actions-maven-release@v1.10.2 #qcastel/github-actions-maven-release@v1.0.3
+        with:
+          #access-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          release-branch-name: "master"
+          git-release-bot-name: "release-bot"
+          git-release-bot-email: "release-bot@example.com"
+          access-token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              
+              
+  
