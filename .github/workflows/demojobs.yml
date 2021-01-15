@@ -79,6 +79,7 @@ jobs:
           node-version: 12.16.1
       
       - name: Ping Artifactory
+        continue-on-error: true
         uses: katcosgrove/jfrogcli-action@v1.0.0-beta
         with:
             cmd: 'ping'
