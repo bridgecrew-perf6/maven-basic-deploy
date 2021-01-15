@@ -42,7 +42,7 @@ jobs:
         run: npm install
 
   job3_publish:
-    name: publish snapshot to jfrog
+    name: publish snapshot
     needs: job1
     runs-on: ubuntu-20.04
     steps:
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
-      - name: Upload artifact to jfrog
+      - name: publish snapshot artifact to jfrog artifactory
         run: |
               echo "-------------------PREVIOUS SETTINGS.xml------------------------------"
               cat ~/.m2/settings.xml
@@ -65,7 +65,7 @@ jobs:
 
 
   job4_publish:
-    name: Upload Trigger
+    name: publish snapshot
     needs: job3_publish
     runs-on: ubuntu-20.04
     steps:
@@ -77,7 +77,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
-      - name: publish to artifactory
+      - name: publish snapshot artifact to jfrog artifactory
         uses: advancedcsg-open/action-jfrog-cli@master
         with:
           url: ${{ secrets.JFROG_URL }}
@@ -100,10 +100,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
-      - name: Upload artifact to jfrog
+      - name: publish release artifact to jfrog artifactory
         continue-on-error: true
         env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+              git config --global user.email "j.bilong@gmail.com
+              git config --global user.name "bilonjea"
+
               cp config/settings.xml ~/.m2/settings.xml
               mvn -ntp release:prepare release:perform -DskipTests
