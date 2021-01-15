@@ -40,3 +40,44 @@ jobs:
           node-version: 12.16.1
       - name: Install node.js packages
         run: npm install
+
+  job3_publish:
+    name: publish snapshot to jfrog
+    needs: job1
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.1
+      - name: Upload artifact to jfrog
+        run: |
+              echo "-------------------PREVIOUS SETTINGS.xml------------------------------"
+              cat ~/.m2/settings.xml
+
+              java -version
+              mv config/settings.xml ~/.m2/settings.xml
+              mvn -ntp package deploy -Pprod -DskipTests
+
+
+  job5_release:
+    name: publish release to jfrog
+    needs: job3_publish
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.1
+      - name: Upload artifact to jfrog
+        run: |
+              mv config/settings.xml ~/.m2/settings.xml
+              mvn -ntp release:prepare release:perform -DskipTests
