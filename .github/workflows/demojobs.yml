@@ -127,7 +127,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
-          path: target/jacoco
+          path: target/test-results/coverage
           
           
   job3_publish:
@@ -142,6 +142,8 @@ jobs:
           architecture: x64
       - name: publish snapshot artifact to jfrog artifactory
         run: |
+          
+             cp config/settings.xml ~/.m2/settings.xml
              cat ~/.m2/settings.xml
              mvn -ntp package deploy -Pprod -DskipTests
   
