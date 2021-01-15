@@ -78,6 +78,9 @@ jobs:
         with:
           node-version: 12.16.1
       - name: Upload artifact to jfrog
+        continue-on-error: true
+        env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
               cp config/settings.xml ~/.m2/settings.xml
               mvn -ntp release:prepare release:perform -DskipTests
