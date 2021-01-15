@@ -77,7 +77,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.16.1
-      
       - name: Ping Artifactory
         continue-on-error: true
         uses: katcosgrove/jfrogcli-action@v1.0.0-beta
@@ -90,6 +89,42 @@ jobs:
             user: ${{ secrets.JFROG_USER }}
             pass: ${{ secrets.JFROG_ENCRYPTED_PWD }}
             url: ${{ secrets.JFROG_URL }}
+      - name: publish snapshot artifact to jfrog artifactory
+        continue-on-error: true
+        run: |
+              cat ~/.m2/settings.xml
+              mvn -ntp package deploy -Pprod -DskipTests
+  
+  job4_publish_bis:
+    name: publish snapshot
+    needs: job3_publish
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2 # The checkout step downloads a copy of your repository on the runner.
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          architecture: x64
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.1
+      - name: Connect to Artifactory
+        continue-on-error: true
+        uses: Deepakanandrao/jfrog-cli@v3
+        with:
+          cli_cmd: |                                      # commands to be excuted
+                'jfrog rt ping'
+                 cat ~/.m2/settings.xml
+                 mvn -ntp package deploy -Pprod -DskipTests
+        env:  
+          SERVER_URL: ${{ secrets.JFROG_URL }}           # Required (e.g. https://jfrogy.com/artifactory)
+          #SERVER_ID: ${{ secrets.SERVER_ID }}             # Optional - Name to be recognized server with
+          #DISTRIBUTION_URL: ${{ secrets.SERVER_URL }}     # Optional
+          ACCESS_TYPE: "access-token" #${{ secrets.ACTION_TYPE }}         # Required  (username-password, access-token, api-key)
+          #USERNAME: ${{ secrets.JFROG_USER }}               # Required any of one of the following
+          #PASSWORD: ${{ secrets.JFROG_ENCRYPTED_PWD }}
+          #API_KEY: ${{ secrets.JFROG_API_KEY }}
+          ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }} 
       - name: publish snapshot artifact to jfrog artifactory
         continue-on-error: true
         run: |
