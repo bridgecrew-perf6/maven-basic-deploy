@@ -82,8 +82,10 @@ jobs:
         with:
           url: ${{ secrets.JFROG_URL }}
           credentials type: ${{ secrets.JFROG_CREDENTIALS_TYPE }}
-          apikey: ${{ secrets.JFROG_API_KEY }}
-          #args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
+          password: ${{ secrets.JFROG_ENCRYPTED_PWD }}
+          #access token: ${{ secrets.JFROG_ACCESS_TOKEN }}
+          #apikey: ${{ secrets.JFROG_API_KEY }}
+          args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
       - name: publish snapshot artifact to jfrog artifactory
         run: |
               cat ~/.m2/settings.xml
