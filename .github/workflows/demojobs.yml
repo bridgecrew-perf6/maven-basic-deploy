@@ -85,7 +85,7 @@ jobs:
             cmd: 'ping'
         env:
             auth: ${{ secrets.JFROG_AUTH_TYPE }}
-            accesstoken: ${{ JFROG_ACCESS_TOKEN }}
+            accesstoken: ${{ secrets.JFROG_ACCESS_TOKEN }}
             #apikey: ${{ secrets.JFROG_API_KEY }}
             #user: ${{ secrets.JFROG_USER }}
             #pass: ${{ secrets.JFROG_ENCRYPTED_PWD }}
