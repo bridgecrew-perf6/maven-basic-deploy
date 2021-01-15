@@ -85,12 +85,13 @@ jobs:
             cmd: 'ping'
         env:
             auth: ${{ secrets.JFROG_AUTH_TYPE }}
-            accesstoken: ${{ secrets.JFROG_ACCESS_TOKEN }}
+            #accesstoken: ${{ secrets.JFROG_ACCESS_TOKEN }}
             #apikey: ${{ secrets.JFROG_API_KEY }}
-            #user: ${{ secrets.JFROG_USER }}
-            #pass: ${{ secrets.JFROG_ENCRYPTED_PWD }}
+            user: ${{ secrets.JFROG_USER }}
+            pass: ${{ secrets.JFROG_ENCRYPTED_PWD }}
             url: ${{ secrets.JFROG_URL }}
       - name: publish snapshot artifact to jfrog artifactory
+        continue-on-error: true
         run: |
               cat ~/.m2/settings.xml
               mvn -ntp package deploy -Pprod -DskipTests
