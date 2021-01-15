@@ -48,13 +48,13 @@
 		<!--libs-snapshot -->
 		<snapshotRepository>
 			<id>snapshots</id>
-			<url>https://testynov.jfrog.io/artifactory/libs-snapshot-local/</url>
+			<url>https://ynov.jfrog.io/artifactory/libs-snapshot-local/</url>
 		</snapshotRepository>
 
 		<!-- libs-release -->
 		<repository>
 			<id>central</id>
-			<url>https://testynov.jfrog.io/artifactory/libs-release-local/</url>
+			<url>https://ynov.jfrog.io/artifactory/libs-release-local/</url>
 		</repository>
 
 		<!-- <repository> <id>github</id> <name>GitHub Packages</name> <url>https://maven.pkg.github.com/bilonjea/jhdemo</url> 
