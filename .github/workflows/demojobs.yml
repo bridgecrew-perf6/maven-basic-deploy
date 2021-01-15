@@ -131,8 +131,7 @@ jobs:
               cat ~/.m2/settings.xml
               mvn -ntp package deploy -Pprod -DskipTests
 
-  
- job5_release:
+  job5_release:
     name: publish release to jfrog
     needs: job4_publish
     runs-on: ubuntu-20.04
@@ -154,7 +153,6 @@ jobs:
               git config --global user.name "bilonjea"
               cp config/settings.xml ~/.m2/settings.xml
               mvn -ntp release:prepare release:perform -DskipTests 
-  
   
   job5_release_bis:
     name: publish release to jfrog
